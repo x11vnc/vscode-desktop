@@ -1,0 +1,12 @@
+os: linux
+dist: trusty
+language: python
+services: docker
+
+script:
+  - docker --version
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
+  # Build only if the commit range of a push contains Dockerfile or .travis.yml
+  - 'docker build --tag compdatasci/vscode-desktop:latest . &&
+     docker push compdatasci/vscode-desktop'
+  - docker images

@@ -1,0 +1,10 @@
+# .clang-format for C++-11 based on Google Style
+# https://google.github.io/styleguide/cppguide.html
+# Generated using https://zed0.co.uk/clang-format-configurator/
+
+---
+BasedOnStyle: Google
+Cpp11BracedListStyle: 'true'
+Standard: Cpp11
+
+...
