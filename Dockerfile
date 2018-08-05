@@ -47,7 +47,8 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     pip3 install -U \
         autopep8 \
         flake8 \
-        pylint && \
+        pylint \
+        pytest && \
     echo "move_to_config vscode" >> /usr/local/bin/init_vnc && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
@@ -69,6 +70,8 @@ RUN bash -c 'for ext in \
         gimly81.matlab \
         krvajalm.linter-gfortran \
         ms-python.python \
+        vector-of-bool.cmake-tools \
+        twxs.cmake \
         formulahendry.terminal; \
         do \
             code --install-extension $ext; \
