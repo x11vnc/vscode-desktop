@@ -1,12 +1,13 @@
 os: linux
-dist: trusty
 language: python
 services: docker
 
+before_script:
+  - git clone --depth=1 https://$GIT_TOKEN@github.com/xmjiao/ci-util.git
+
 script:
-  - docker --version
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
-  # Build only if the commit range of a push contains Dockerfile or .travis.yml
-  - 'docker build --tag compdatasci/vscode-desktop:latest . &&
-     docker push compdatasci/vscode-desktop'
-  - docker images
+  - './ci-util/build-docker.sh &&
+     ./vscode_desktop.py -t $TRAVIS_BRANCH -d -n -V && docker stop $(docker ps -q)'
+
+after_success:
+  - ./ci-util/trigger-via-api.sh
