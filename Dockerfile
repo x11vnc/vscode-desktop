@@ -1,13 +1,13 @@
 # Builds a Docker image with Ubuntu 18.04 and Visual Studio Code
-# for scientific computing, including language supports for C/C++, 
-# Python, FORTRAN, MATLAB, Markdown, LaTeX, and Doxygen. Also 
+# for scientific computing, including language supports for C/C++,
+# Python, FORTRAN, MATLAB, Markdown, LaTeX, and Doxygen. Also
 # enables the extensions doxygen, gitLens, terminal, clang-format,
 # and code spell checker.
 #
 # Authors:
 # Xiangmin Jiao <xmjiao@gmail.com>
 
-FROM x11vnc/desktop:singularity
+FROM x11vnc/desktop:18.04
 LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 USER root
@@ -15,7 +15,7 @@ WORKDIR /tmp
 
 ADD image/home $DOCKER_HOME/
 
-# Install mscode and system packages
+# Install vscode and system packages
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
     mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg && \
     sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list' && \
@@ -56,7 +56,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
 USER $DOCKER_USER
 WORKDIR $DOCKER_HOME
 
-# Install mscode extensions
+# Install vscode extensions
 RUN bash -c 'for ext in \
         ms-vscode.cpptools \
         xaver.clang-format \
