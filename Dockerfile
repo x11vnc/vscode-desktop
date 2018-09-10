@@ -22,6 +22,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     \
     apt-get update && \
     apt-get install  -y --no-install-recommends \
+        vim \
         build-essential \
         gfortran \
         cmake \
@@ -34,11 +35,14 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         wget \
         ccache \
         \
+        clang \
         clang-format \
+        libboost-all-dev \
         code && \
     apt-get install -y --no-install-recommends \
         python3-pip \
         python3-dev \
+        python3-wheel \
         pandoc \
         ttf-dejavu && \
     apt-get clean && \
@@ -57,8 +61,14 @@ USER $DOCKER_USER
 WORKDIR $DOCKER_HOME
 
 # Install vscode extensions
-RUN bash -c 'for ext in \
+RUN git clone https://github.com/VundleVim/Vundle.vim.git \
+        $DOCKER_HOME/.vim/bundle/Vundle.vim && \
+    vim -c "PluginInstall" -c "quitall" && \
+    python3 $DOCKER_HOME/.vim/bundle/YouCompleteMe/install.py \
+        --clang-completer --system-boost --system-libclang && \
+    bash -c 'for ext in \
         ms-vscode.cpptools \
+        you-complete-me \
         xaver.clang-format \
         cschlosser.doxdocgen \
         bbenoist.doxygen \
