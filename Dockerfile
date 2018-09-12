@@ -68,7 +68,7 @@ RUN git clone https://github.com/VundleVim/Vundle.vim.git \
         --clang-completer --system-boost --system-libclang && \
     bash -c 'for ext in \
         ms-vscode.cpptools \
-        you-complete-me \
+        richardhe.you-complete-me \
         xaver.clang-format \
         cschlosser.doxdocgen \
         bbenoist.doxygen \
