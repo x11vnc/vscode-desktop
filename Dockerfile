@@ -24,6 +24,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     apt-get install  -y --no-install-recommends \
         vim \
         build-essential \
+        pkg-config \
         gfortran \
         cmake \
         bison \
