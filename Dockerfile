@@ -83,6 +83,8 @@ RUN git clone https://github.com/VundleVim/Vundle.vim.git \
         ms-python.python \
         vector-of-bool.cmake-tools \
         twxs.cmake \
+        shardulm94.trailing-spaces \
+        ms-azuretools.vscode-docker \
         formulahendry.terminal; \
         do \
             code --install-extension $ext; \
