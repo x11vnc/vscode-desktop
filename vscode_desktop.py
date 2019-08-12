@@ -8,7 +8,7 @@ It also sets up port forwarding for ssh.
 
 # Author: Xiangmin Jiao <xmjiao@gmail.com>
 
-from __future__ import print_function
+from __future__ import print_function  # Only Python 2.x
 
 import sys
 import subprocess
@@ -18,9 +18,11 @@ import os
 owner = "compdatasci"
 proj = os.path.basename(sys.argv[0]).split('_')[0]
 image = owner + "/" + proj + "-desktop"
-tag = ""
+tag = "latest"
 projdir = "project"
 workdir = "project"
+volume = proj + "_project"
+
 
 
 def parse_args(description):
@@ -43,8 +45,8 @@ def parse_args(description):
 
     parser.add_argument('-v', '--volume',
                         help='A data volume to be mounted at ~/" + projdir + ". ' +
-                        'The default is ' + proj + '_project.',
-                        default=proj + "_project")
+                        'The default is ' + volume + '.',
+                       default=volume)
 
     parser.add_argument('-w', '--workdir',
                         help='The starting work directory in container. ' +
@@ -194,14 +196,18 @@ def get_screen_resolution():
 def handle_interrupt(container):
     """Handle keyboard interrupt"""
     try:
-        print("Press Ctrl-C again to stop the server: ")
+        print("Press Ctrl-C again to terminate the container: ")
         time.sleep(5)
         print('Invalid response. Resuming...')
     except KeyboardInterrupt:
-        print('*** Stopping the server.')
-        subprocess.Popen(["docker", "exec", container,
-                          "killall", "my_init"],
-                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        print('*** Stopping the container ' + container)
+        if platform.system() == "Windows":
+            subprocess.check_output(["docker", "stop", container])
+        else:
+            subprocess.Popen(["docker", "exec", container,
+                              "killall", "my_init"],
+                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
         sys.exit(0)
 
 
@@ -355,7 +361,11 @@ if __name__ == "__main__":
     if not os.path.exists(homedir + "/.ssh"):
         os.mkdir(homedir + "/.ssh")
 
-    volumes += ["-v", homedir + "/.ssh" + ":" + docker_home + "/.ssh"]
+    if platform.system() != 'Windows':
+        volumes += ["-v", homedir + "/.ssh" + ":" + docker_home + "/.ssh"]
+    else:
+        # On Windows, cannot use ~/.ssh directly. Mount it into ~/.ssh-host.
+        volumes += ["-v", homedir + "/.ssh" + ":" + docker_home + "/.ssh-host"]
 
     devices = []
     if args.nvidia:
@@ -418,6 +428,12 @@ if __name__ == "__main__":
                                      "to connect to localhost:%s with password %s\n" %
                                      (port_vnc, passwd))
 
+                        if platform.system() == 'Windows':
+                            # Copy ssh config files
+                            subprocess.check_output(["docker", "exec", container,
+                                    "rsync", "-rog", "--chown=ubuntu:ubuntu", "--chmod=600",
+                                    "/home/ubuntu/.ssh-host/", "/home/ubuntu/.ssh/"])
+
                         stdout_write("You can also log into the container using the command\n    ssh -X -p " + port_ssh + " " +
                                      docker_user + "@localhost -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no\n" +
                                      "with an authorized key in " +
@@ -436,10 +452,10 @@ if __name__ == "__main__":
 
             if args.detach:
                 print('Started container ' + container + ' in background.')
-                print('To stop it, use "docker stop ' + container + '".')
+                print('To terminate it, use "docker stop ' + container + '".')
                 sys.exit(0)
 
-            print("Press Ctrl-C to stop the server.")
+            print("Press Ctrl-C to terminate the container.")
             time.sleep(1)
 
             # Wait until the container exits or Ctlr-C is pressed
@@ -452,7 +468,7 @@ if __name__ == "__main__":
                 # If Docker process no long exists, exit
                 if args.verbose:
                     stdout_write(
-                        "Check whether docker container is running.\n")
+                        "Check whether the docker container is running.\n")
                 if not subprocess.check_output(['docker', 'ps',
                                                 '-q', '-f',
                                                 'name=' + container]):
