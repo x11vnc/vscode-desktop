@@ -20,7 +20,7 @@ let python_highlight_all=1
 syntax on
 set wrap
 set expandtab
-set number
+set nonumber
 set tabstop=4
 set shiftwidth=4
 set visualbell
