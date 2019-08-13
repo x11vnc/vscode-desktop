@@ -88,7 +88,6 @@ RUN git clone https://github.com/VundleVim/Vundle.vim.git \
         formulahendry.terminal; \
         do \
             code --install-extension $ext; \
-        done' && \
-    echo '@code .' >> $DOCKER_HOME/.config/lxsession/LXDE/autostart
+        done'
 
 USER root
