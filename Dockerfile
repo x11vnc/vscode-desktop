@@ -38,7 +38,6 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         \
         clang \
         clang-format \
-        libclang-8-dev \
         libboost-all-dev \
         code && \
     apt-get install -y --no-install-recommends \
@@ -67,7 +66,7 @@ RUN git clone https://github.com/VundleVim/Vundle.vim.git \
         $DOCKER_HOME/.vim/bundle/Vundle.vim && \
     vim -c "PluginInstall" -c "quitall" && \
     python3 $DOCKER_HOME/.vim/bundle/YouCompleteMe/install.py \
-        --clang-completer --system-boost --system-libclang && \
+        --clang-completer --system-boost && \
     bash -c 'for ext in \
         ms-vscode.cpptools \
         richardhe.you-complete-me \
