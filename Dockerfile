@@ -38,6 +38,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         \
         clang \
         clang-format \
+        libclang-8-dev \
         libboost-all-dev \
         code && \
     apt-get install -y --no-install-recommends \
