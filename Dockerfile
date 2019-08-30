@@ -54,7 +54,6 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         flake8 \
         pylint \
         pytest && \
-    echo "move_to_config vscode" >> /usr/local/bin/init_vnc && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
 
@@ -62,7 +61,9 @@ USER $DOCKER_USER
 WORKDIR $DOCKER_HOME
 
 # Install vscode extensions
-RUN git clone https://github.com/VundleVim/Vundle.vim.git \
+RUN mv $DOCKER_HOME/.vscode $DOCKER_HOME/.config/vscode && \
+    ln -s -f $DOCKER_HOME/.config/vscode $DOCKER_HOME/.vscode && \
+    git clone https://github.com/VundleVim/Vundle.vim.git \
         $DOCKER_HOME/.vim/bundle/Vundle.vim && \
     vim -c "PluginInstall" -c "quitall" && \
     python3 $DOCKER_HOME/.vim/bundle/YouCompleteMe/install.py \
