@@ -61,7 +61,8 @@ USER $DOCKER_USER
 WORKDIR $DOCKER_HOME
 
 # Install vscode extensions
-RUN mv $DOCKER_HOME/.vscode $DOCKER_HOME/.config/vscode && \
+RUN mkdir -p $DOCKER_HOME/.vscode && \
+    mv $DOCKER_HOME/.vscode $DOCKER_HOME/.config/vscode && \
     ln -s -f $DOCKER_HOME/.config/vscode $DOCKER_HOME/.vscode && \
     git clone https://github.com/VundleVim/Vundle.vim.git \
         $DOCKER_HOME/.vim/bundle/Vundle.vim && \
