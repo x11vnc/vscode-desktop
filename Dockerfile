@@ -7,7 +7,7 @@
 # Authors:
 # Xiangmin Jiao <xmjiao@gmail.com>
 
-FROM x11vnc/desktop:18.04
+FROM x11vnc/desktop:next
 LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 USER root
