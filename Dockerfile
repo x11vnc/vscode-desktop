@@ -14,6 +14,7 @@ USER root
 WORKDIR /tmp
 
 ADD image/home $DOCKER_HOME/
+ADD image/etc /etc
 
 # Install vscode and system packages
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
@@ -52,6 +53,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     pip3 install -U \
         autopep8 \
         flake8 \
+        yapf \
         pylint \
         pytest \
         Cython \
