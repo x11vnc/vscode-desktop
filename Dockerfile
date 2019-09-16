@@ -52,6 +52,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     pip3 install -U \
         autopep8 \
         flake8 \
+        cpplint \
         pylint \
         pytest \
         Cython \
@@ -74,8 +75,8 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         --clang-completer --system-boost && \
     bash -c 'for ext in \
         ms-vscode.cpptools \
-        richardhe.you-complete-me \
         xaver.clang-format \
+        mine.cpplint \
         cschlosser.doxdocgen \
         bbenoist.doxygen \
         streetsidesoftware.code-spell-checker \
