@@ -53,7 +53,10 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         autopep8 \
         flake8 \
         pylint \
-        pytest && \
+        pytest \
+        Cython \
+        Sphinx \
+        sphinx_rtd_theme && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
 
@@ -83,6 +86,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         gimly81.matlab \
         krvajalm.linter-gfortran \
         ms-python.python \
+        tcwalther.cython \
         vector-of-bool.cmake-tools \
         twxs.cmake \
         shardulm94.trailing-spaces \
