@@ -15,7 +15,7 @@ import subprocess
 import time
 import os
 
-owner = "compdatasci"
+owner = "x11vnc"
 proj = os.path.basename(sys.argv[0]).split('_')[0]
 image = owner + "/" + proj + "-desktop"
 tag = "latest"
