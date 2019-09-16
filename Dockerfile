@@ -52,7 +52,6 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     pip3 install -U \
         autopep8 \
         flake8 \
-        cpplint \
         pylint \
         pytest \
         Cython \
@@ -76,7 +75,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
     bash -c 'for ext in \
         ms-vscode.cpptools \
         xaver.clang-format \
-        mine.cpplint \
+        jbenden.c-cpp-flylint \
         cschlosser.doxdocgen \
         bbenoist.doxygen \
         streetsidesoftware.code-spell-checker \
@@ -92,6 +91,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         twxs.cmake \
         shardulm94.trailing-spaces \
         ms-azuretools.vscode-docker \
+        formulahendry.code-runner \
         formulahendry.terminal; \
         do \
             code --install-extension $ext; \
