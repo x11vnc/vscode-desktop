@@ -39,7 +39,8 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         clang \
         clang-format \
         libboost-all-dev \
-        code && \
+        code \
+        enchant && \
     apt-get install -y --no-install-recommends \
         python3-pip \
         python3-dev \
@@ -53,6 +54,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         autopep8 \
         flake8 \
         yapf \
+        pyenchant \
         pylint \
         pytest \
         Cython \
