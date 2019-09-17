@@ -14,5 +14,14 @@
     "C_Cpp.updateChannel": "Insiders",
     "C_Cpp.default.intelliSenseMode": "msvc-x64",
     "c-cpp-flylint.flexelint.enable": false,
-    "c-cpp-flylint.cppcheck.enable": false
+    "c-cpp-flylint.cppcheck.enable": false,
+    "cSpell.language": "en",
+    "cSpell.allowCompoundWords": true,
+    "cSpell.minWordLength": 4,
+    "cSpell.dictionaryDefinitions": [
+    { "name": "enchant", "path": "/home/ubuntu/.config/enchant/en_US.dic"}
+    ],
+    "cSpell.dictionaries": [
+        "enchant"
+    ]
 }
