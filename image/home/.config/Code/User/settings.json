@@ -13,10 +13,33 @@
     "C_Cpp.clang_format_sortIncludes": true,
     "C_Cpp.clang_format_path": "/usr/bin/clang-format",
     "C_Cpp.updateChannel": "Insiders",
-    "C_Cpp.default.intelliSenseMode": "msvc-x64",
+    "C_Cpp.default.cppStandard": "c++11",
+    "C_Cpp.default.cStandard": "c99",
+    "C_Cpp.errorSquiggles": "Disabled",
+    "C_Cpp.default.intelliSenseMode": "gcc-x64",
+    "C_Cpp.default.compilerPath": "/usr/bin/gcc",
+    "C_Cpp.default.includePath": [
+        "/usr/include/eigen3",
+        "/usr/include/python3.6",
+        "/usr/include/openmpi"
+    ],
+    "c-cpp-flylint.clang.includePaths": [
+        "/usr/include/eigen3",
+        "/usr/include/python3.6",
+        "/usr/include/openmpi"
+    ],
+    "c-cpp-flylint.clang.standard": [
+        "c99",
+        "c++11"
+    ],
+    "c-cpp-flylint.clang.extraArgs" : [
+        "-Wno-pragma-once-outside-header"
+    ],
+    "c-cpp-flylint.clang.pedantic": true,
+    "c-cpp-flylint.clang.pedanticErrors": true,
     "c-cpp-flylint.flexelint.enable": false,
     "c-cpp-flylint.cppcheck.enable": false,
-    "cSpell.language": "en",
+    "cSpell.language": "en-US",
     "cSpell.allowCompoundWords": true,
     "cSpell.minWordLength": 3,
     "cSpell.dictionaryDefinitions": [
