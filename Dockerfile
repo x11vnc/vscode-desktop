@@ -78,7 +78,6 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         --clang-completer --system-boost && \
     bash -c 'for ext in \
         ms-vscode.cpptools \
-        xaver.clang-format \
         jbenden.c-cpp-flylint \
         cschlosser.doxdocgen \
         bbenoist.doxygen \
