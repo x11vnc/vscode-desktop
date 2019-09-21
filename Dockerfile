@@ -54,6 +54,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         autopep8 \
         flake8 \
         yapf \
+        black \
         pyenchant \
         pylint \
         pytest \
@@ -89,7 +90,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         gimly81.matlab \
         krvajalm.linter-gfortran \
         ms-python.python \
-        tcwalther.cython \
+        guyskk.language-cython \
         vector-of-bool.cmake-tools \
         twxs.cmake \
         shardulm94.trailing-spaces \

@@ -1,7 +1,7 @@
 {
     "python.pythonPath": "/usr/bin/python3",
     "python.linting.flake8Enabled": true,
-    "python.formatting.provider": "yapf",
+    "python.formatting.provider": "black",
     "[python]": {
         "editor.defaultFormatter": "ms-python.python",
         "editor.rulers": [80,120]
@@ -12,10 +12,10 @@
     "C_Cpp.clang_format_fallbackStyle": "Google",
     "C_Cpp.clang_format_sortIncludes": true,
     "C_Cpp.clang_format_path": "/usr/bin/clang-format",
+    "C_Cpp.errorSquiggles": "Disabled",
     "C_Cpp.updateChannel": "Insiders",
     "C_Cpp.default.cppStandard": "c++11",
     "C_Cpp.default.cStandard": "c99",
-    "C_Cpp.errorSquiggles": "Disabled",
     "C_Cpp.default.intelliSenseMode": "gcc-x64",
     "C_Cpp.default.compilerPath": "/usr/bin/gcc",
     "C_Cpp.default.includePath": [
@@ -32,9 +32,6 @@
         "c99",
         "c++11"
     ],
-    "c-cpp-flylint.clang.extraArgs" : [
-        "-Wno-pragma-once-outside-header"
-    ],
     "c-cpp-flylint.clang.pedantic": true,
     "c-cpp-flylint.clang.pedanticErrors": true,
     "c-cpp-flylint.flexelint.enable": false,
@@ -42,6 +39,41 @@
     "cSpell.language": "en-US",
     "cSpell.allowCompoundWords": true,
     "cSpell.minWordLength": 3,
+    "cSpell.enabledLanguageIds": [
+        "asciidoc",
+        "c",
+        "cpp",
+        "csharp",
+        "css",
+        "git-commit",
+        "go",
+        "handlebars",
+        "haskell",
+        "html",
+        "jade",
+        "java",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "jsonc",
+        "latex",
+        "less",
+        "markdown",
+        "php",
+        "plaintext",
+        "python",
+        "pug",
+        "restructuredtext",
+        "rust",
+        "scala",
+        "scss",
+        "text",
+        "typescript",
+        "typescriptreact",
+        "yaml",
+        "yml",
+        "cython"
+    ],
     "cSpell.dictionaryDefinitions": [
     { "name": "enchant", "path": "/home/ubuntu/.config/enchant/en_US.dic"}
     ],
