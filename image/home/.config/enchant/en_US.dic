@@ -126,8 +126,10 @@ subgraph
 undirected
 iterable
 chen
+numgeom
 qiao
 numpy
 numba
 scipy
 asarray
+
