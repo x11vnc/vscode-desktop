@@ -65,6 +65,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
 
 USER $DOCKER_USER
+ENV  GIT_EDITOR=nano EDITOR=code
 WORKDIR $DOCKER_HOME
 
 # Install vscode extensions
