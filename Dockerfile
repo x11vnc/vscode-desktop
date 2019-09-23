@@ -79,6 +79,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
     bash -c 'for ext in \
         ms-vscode.cpptools \
         jbenden.c-cpp-flylint \
+        foxundermoon.shell-format \
         cschlosser.doxdocgen \
         bbenoist.doxygen \
         streetsidesoftware.code-spell-checker \
