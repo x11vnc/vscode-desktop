@@ -1,4 +1,4 @@
-# Builds a Docker image with Ubuntu and Visual Studio Code
+# Builds a Docker image with Ubuntu 18.04 and Visual Studio Code
 # for scientific computing, including language supports for C/C++,
 # Python, FORTRAN, MATLAB, Markdown, LaTeX, and Doxygen. Also
 # enables the extensions doxygen, gitLens, terminal, clang-format,
@@ -45,6 +45,11 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         pandoc \
         ttf-dejavu && \
     apt-get clean && \
+    curl -O https://bootstrap.pypa.io/get-pip.py && \
+    python3 get-pip.py && \
+    pip3 install -U \
+        setuptools \
+	ipython && \
     pip3 install -U \
         autopep8 \
         flake8 \
@@ -96,6 +101,6 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         do \
             code --install-extension $ext; \
         done' && \
-	chmod -R a+r $HOME/.config
+        chmod -R a+r $HOME/.config
 
 USER root
