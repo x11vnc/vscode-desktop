@@ -14,6 +14,7 @@ USER root
 WORKDIR /tmp
 
 ADD image/home $DOCKER_HOME/
+ENV PATH "$PATH:/usr/local/bin"
 
 # Install vscode and system packages
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
@@ -46,7 +47,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     apt-get clean && \
     pip3 install -U \
         setuptools \
-	ipython && \
+        ipython && \
     pip3 install -U \
         autopep8 \
         flake8 \
