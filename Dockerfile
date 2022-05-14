@@ -37,10 +37,8 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         \
         clang \
         clang-format \
-        code && \
-    apt-get install -y --no-install-recommends \
-        pandoc \
-        ttf-dejavu && \
+        code \
+        pandoc && \
     python3 get-pip.py && \
     pip3 install -U \
         setuptools \
