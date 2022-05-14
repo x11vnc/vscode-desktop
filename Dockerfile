@@ -14,7 +14,6 @@ USER root
 WORKDIR /tmp
 
 ADD image/home $DOCKER_HOME/
-ENV PATH "$PATH:/usr/local/bin"
 
 # Install vscode and system packages
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
@@ -38,13 +37,14 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         \
         clang \
         clang-format \
-        libboost-all-dev \
         code \
         enchant && \
     apt-get install -y --no-install-recommends \
         pandoc \
         ttf-dejavu && \
     apt-get clean && \
+    curl -O https://bootstrap.pypa.io/get-pip.py && \
+    python3 get-pip.py && \
     pip3 install -U \
         setuptools \
         ipython && \
