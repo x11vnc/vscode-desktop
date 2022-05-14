@@ -37,13 +37,10 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         \
         clang \
         clang-format \
-        code \
-        enchant && \
+        code && \
     apt-get install -y --no-install-recommends \
         pandoc \
         ttf-dejavu && \
-    apt-get clean && \
-    curl -O https://bootstrap.pypa.io/get-pip.py && \
     python3 get-pip.py && \
     pip3 install -U \
         setuptools \
@@ -53,7 +50,6 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         flake8 \
         yapf \
         black \
-        pyenchant \
         pylint \
         pytest \
         Cython \
