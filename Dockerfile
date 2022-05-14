@@ -7,7 +7,7 @@
 # Authors:
 # Xiangmin Jiao <xmjiao@gmail.com>
 
-FROM xmjiao/desktop:latest
+FROM x11vnc/docker-desktop:latest
 LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 USER root
@@ -44,8 +44,6 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         pandoc \
         ttf-dejavu && \
     apt-get clean && \
-    curl -O https://bootstrap.pypa.io/get-pip.py && \
-    python3 get-pip.py && \
     pip3 install -U \
         setuptools \
 	ipython && \
