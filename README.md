@@ -1,6 +1,16 @@
-# Docker/Singularity Image for Visual Studio Code
+# Docker/Singularity Image for Visual Studio Code with Ubuntu and X11VNC
 
-This Docker image provides the Ubuntu 18.04 environment with X Windows with Visual Studio Code. The X Windows will display in your web browser in full-screen mode. You can use this Docker image on 64-bit Linux, Mac or Windows. It allows you to use the same programming environment regardless which OS you are running on your laptop or desktop.
+This Docker image provides the Ubuntu 22.04 environment with X Windows 
+with Visual Studio Code. The X Windows can display in your web browser
+in full-screen mode. You can use this Docker image on 64-bit Linux,
+Mac or Windows. It allows you to use the same programming environment
+regardless which OS you are running on your laptop or desktop. In
+addition, it is also compatible with 
+[Singularity](https://sylabs.io/singularity/)
+(tested with Singularity v3.5) for high-performance computing platforms.
+
+![Build Status](https://github.com/x11vnc/vscode-desktop/actions/workflows/vscode-image.yml/badge.svg)
+[![Docker Pulls](https://img.shields.io/docker/pulls/x11vnc/vscode-desktop.svg)](https://hub.docker.com/r/x11vnc/vscode-desktop/)
 
 ## Preparation
 
@@ -25,11 +35,6 @@ Download the Docker Community Edition for free at https://www.docker.com/communi
 5. When you use Docker for the first time, you must change its settings to make the C drive shared. To do this, right-click the Docker icon in the system tray, and then click on `Settings...`. Go to `Shared Drives` tab and check the C drive.
 6. Docker for Windows saves the images and data volumes in a shared public folder `C:\Users\Public\Documents\Hyper-V\Virtual Hard Disks\MobyLinuxVM.vhdx`. This is a major security risk because all your images and data can be accessed and modified by other Docker users on the same computer. If you are using a shared Windows computer, make sure you create a private folder such as `C:\Users\YourUserName\Documents\Hyper-V\Virtual Hard Disks` and then go to `Advanced` tab in Docker Settings, and change the `Image and Volume VHD Location` to this folder.
 
-**Notes for Mac Users**
-
-1. Docker Version 17.06.0-ce [has a bug](https://github.com/docker/for-mac/issues/1809) that causes Docker to restart when your computer wakes up from sleep and when your network settings change. As a workaround, change the Proxies setting in Docker's preferences to "No Proxy".
-2. On Mac, the clock in Docker would lag when your computer goes to sleep and then wakes up. You can resolve this issue either by restarting Docker after waking up or by installing [sync-docker-time](https://github.com/x11vnc/sync-docker-time).
-
 **Notes for Linux Users**
 
 * Most Linux distributions have a `docker` package. You can use the package installer for your system to install `docker`. Note that on some system (e.g., OpenSUSE), you may need to run the following commands to start up `docker` after installing `docker`:
@@ -49,14 +54,14 @@ After adding yourself to the `docker` group, you need to log out and log back in
 
 ## Running the Docker Image
 
-To run the Docker image, first download the script [`vscode_desktop.py`](https://raw.githubusercontent.com/compdatasci/vscode-desktop/master/vscode_desktop.py)
+To run the Docker image, first download the script [`vscode_desktop.py`](https://raw.githubusercontent.com/x11vnc/vscode-desktop/master/vscode_desktop.py)
 and save it to the working directory where you will store your codes and data. You can download the script using command line: On Windows, start `Windows PowerShell`, use the `cd` command to change to the working directory where you will store your codes and data, and then run the following command:
 ```
-curl https://raw.githubusercontent.com/compdatasci/vscode-desktop/master/vscode_desktop.py -outfile vscode_desktop.py
+curl https://raw.githubusercontent.com/x11vnc/vscode-desktop/main/vscode_desktop.py -outfile vscode_desktop.py
 ```
 On Linux or Mac, start a terminal, use the `cd` command to change to the working directory, and then run the following command:
 ```
-curl -s -O https://raw.githubusercontent.com/compdatasci/vscode-desktop/master/vscode_desktop.py
+curl -s -O https://raw.githubusercontent.com/x11vnc/vscode-desktop/main/vscode_desktop.py
 ```
 
 After downloading the script, you can start the Docker image using the command
@@ -88,6 +93,45 @@ in the directory where you ran the `curl` command above.
 
 To stop the Docker image, press Ctrl-C twice in the terminal (or Windows PowerShell on Windows) on your host computer where you started the Docker image, and close the tab for the desktop in your web browser.
 
+## Use with Singularity
+
+This Docker image is constructed to be compatible with Singularity. This 
+has been tested with Singularity v3.5. If your system does not yet have
+Singularity, you may need to install it by following 
+[these instructions](https://www.sylabs.io/guides/3.9/user-guide/quick_start.html#quick-installation-steps).
+You must have root access to install Singularity, but you can use
+Singularity as a regular user after it has been installed. If you do not
+have root access, such as on an HPC platform, ask your system administrator
+to install Singularity for you. It is recommended you use Singularity v2.6 or later.
+
+To use the Docker image with Singularity, please issue the command
+```
+singularity run -c -B $HOME docker://x11vnc/vscode-desktop:latest
+```
+It will automatically mount some minimal /dev directories and $HOME in Singularity
+but does not mount most others (such as /run, /tmp, etc.). If you do not want to
+mount your home directory, then remove the `-B $HOME` option.
+
+Alternatively, if you use Singularity v3.x, you may use the commands
+```
+singularity pull vscode-desktop:latest.sif docker://x11vnc/vscode-desktop:latest
+singularity run -c -B $HOME ./vscode-desktop:latest.sif
+```
+
+Notes regarding Singularity:
+- When using Singularity, the user name in the container will be the same
+  as that on the host. You will still have read access to /home/$DOCKER_USER.
+- To avoid conflict with the user configuration on the host when using
+  Singularity, this image uses /bin/zsh as the login shell in the container.
+  By default, /home/$DOCKER_USER/.zprofile and /home/$DOCKER_USER/.zshrc
+  will be copied to your home directory if they do not yet exist. This works
+  the best if you use another login shell (such as /bin/bash) on the host.
+  If you are a `zsh` user, you may need to edit your `.zshrc` and `.zprofile`
+  to work both on the host and in the Singularity image.
+- To avoid potential conflict with your X11 configuration, this image uses
+  LXDE for the desktop manager. This works best if you do not use LXDE on
+  your host.
+
 ## Entering Full-Screen Mode for Desktop Environment
 
 For the best experience, use [VNC Viewer](http://realvnc.com/download/viewer) to connect to Docker image with the port and password displayed in the terminal output, which supports the full-screen mode. If you don't have the VNC viewer, you can
@@ -113,3 +157,11 @@ directory that you might have mounted explicitly are persistent. Any change to f
  - Use the `logout` button in the lower-left corner of the Docker desktop,
  - Press Ctrl-C twice in the terminal where you started the python script, or
  - Run the command `docker stop <Container ID>` in a terminal on the host, and you can find the `Container ID` using the `docker ps -a` command.
+
+ ## Developer
+This project was developed by Xiangmin Jiao as a tool for teaching and research at Stony Brook University. Note that this project is independent of the [LibVNC/x11vnc](https://github.com/LibVNC/x11vnc) project.
+
+## License
+
+See the LICENSE file for details.
+
