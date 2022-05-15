@@ -7,7 +7,7 @@
 # Authors:
 # Xiangmin Jiao <xmjiao@gmail.com>
 
-FROM x11vnc/docker-desktop:latest
+FROM x11vnc/docker-desktop:20.04
 LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 USER root
