@@ -13,6 +13,7 @@ LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 USER root
 WORKDIR /tmp
 
+ADD image/usr /usr
 ADD image/home $DOCKER_HOME/
 
 # Install vscode and system packages
@@ -22,7 +23,6 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     \
     apt-get update && \
     apt-get install  -y --no-install-recommends \
-        vim \
         build-essential \
         pkg-config \
         gfortran \
@@ -53,6 +53,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         Sphinx \
         sphinx_rtd_theme && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    echo 'config_vscode.sh' >> /usr/local/bin/init_vnc && \
     chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
 
 USER $DOCKER_USER
@@ -88,6 +89,8 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         do \
             code --install-extension $ext; \
         done' && \
-        chmod -R a+r $HOME/.config
+        rm -rf $HOME/.config/vscode && \
+        chmod -R a+r $DOCKER_HOME/.config && \
+        find $DOCKER_HOME/.config -type d -exec chmod a+x {} \;
 
 USER root
