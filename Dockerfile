@@ -88,6 +88,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         do \
             code --install-extension $ext; \
         done' && \
-        chmod -R a+r $HOME/.config
+    chmod -R a+r $HOME/.config && \
+    find $DOCKER_HOME -type d -exec chmod a+x {} \;
 
 USER root
