@@ -1,4 +1,4 @@
-# Builds a Docker image with Ubuntu 22.04 and Visual Studio Code
+# Builds a Docker image with Ubuntu 20.04 and Visual Studio Code
 # for scientific computing, including language supports for C/C++,
 # Python, FORTRAN, MATLAB, Markdown, LaTeX, and Doxygen. Also
 # enables the extensions doxygen, gitLens, terminal, clang-format,
@@ -89,8 +89,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         do \
             code --install-extension $ext; \
         done' && \
-        rm -rf $HOME/.config/vscode && \
-        chmod -R a+r $DOCKER_HOME/.config && \
-        find $DOCKER_HOME/.config -type d -exec chmod a+x {} \;
+    chmod -R a+r $HOME/.config && \
+    find $DOCKER_HOME -type d -exec chmod a+x {} \;
 
 USER root
