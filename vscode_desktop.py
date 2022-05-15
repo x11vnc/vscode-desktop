@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Launch a Docker image with Ubuntu and LXDE window manager, and

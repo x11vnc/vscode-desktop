@@ -57,6 +57,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
 
 USER $DOCKER_USER
 ENV  GIT_EDITOR=nano EDITOR=code
+ENV  DONT_PROMPT_WSL_INSTALL=1
 WORKDIR $DOCKER_HOME
 
 # Install vscode extensions
