@@ -1,4 +1,4 @@
-# Builds a Docker image with Ubuntu 18.04 and Visual Studio Code
+# Builds a Docker image with Ubuntu 22.04 and Visual Studio Code
 # for scientific computing, including language supports for C/C++,
 # Python, FORTRAN, MATLAB, Markdown, LaTeX, and Doxygen. Also
 # enables the extensions doxygen, gitLens, terminal, clang-format,
@@ -7,7 +7,7 @@
 # Authors:
 # Xiangmin Jiao <xmjiao@gmail.com>
 
-FROM x11vnc/desktop:latest
+FROM x11vnc/docker-desktop:latest
 LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 USER root
@@ -37,24 +37,16 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         \
         clang \
         clang-format \
-        libboost-all-dev \
         code \
-        enchant && \
-    apt-get install -y --no-install-recommends \
-        pandoc \
-        ttf-dejavu && \
-    apt-get clean && \
-    curl -O https://bootstrap.pypa.io/get-pip.py && \
-    python3 get-pip.py && \
+        pandoc && \
     pip3 install -U \
         setuptools \
-	ipython && \
+        ipython && \
     pip3 install -U \
         autopep8 \
         flake8 \
         yapf \
         black \
-        pyenchant \
         pylint \
         pytest \
         Cython \
@@ -65,17 +57,13 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
 
 USER $DOCKER_USER
 ENV  GIT_EDITOR=nano EDITOR=code
+ENV  DONT_PROMPT_WSL_INSTALL=1
 WORKDIR $DOCKER_HOME
 
 # Install vscode extensions
 RUN mkdir -p $DOCKER_HOME/.vscode && \
     mv $DOCKER_HOME/.vscode $DOCKER_HOME/.config/vscode && \
     ln -s -f $DOCKER_HOME/.config/vscode $DOCKER_HOME/.vscode && \
-    git clone https://github.com/VundleVim/Vundle.vim.git \
-        $DOCKER_HOME/.vim/bundle/Vundle.vim && \
-    vim -c "PluginInstall" -c "quitall" && \
-    python3 $DOCKER_HOME/.vim/bundle/YouCompleteMe/install.py \
-        --clang-completer --system-boost && \
     bash -c 'for ext in \
         ms-vscode.cpptools \
         jbenden.c-cpp-flylint \

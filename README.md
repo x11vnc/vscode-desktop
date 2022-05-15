@@ -1,8 +1,6 @@
-# Docker Image for Visual Studio Code
+# Docker/Singularity Image for Visual Studio Code
 
 This Docker image provides the Ubuntu 18.04 environment with X Windows with Visual Studio Code. The X Windows will display in your web browser in full-screen mode. You can use this Docker image on 64-bit Linux, Mac or Windows. It allows you to use the same programming environment regardless which OS you are running on your laptop or desktop.
-
-[![Build Status](https://travis-ci.org/compdatasci/vscode-desktop.svg?branch=master)](https://travis-ci.org/compdatasci/vscode-desktop) [![](https://images.microbadger.com/badges/image/compdatasci/vscode-desktop.svg)](https://microbadger.com/images/compdatasci/vscode-desktop)
 
 ## Preparation
 
