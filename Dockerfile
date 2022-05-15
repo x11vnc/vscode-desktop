@@ -39,7 +39,6 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         clang-format \
         code \
         pandoc && \
-    python3 get-pip.py && \
     pip3 install -U \
         setuptools \
         ipython && \
