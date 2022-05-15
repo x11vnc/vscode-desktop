@@ -63,11 +63,6 @@ WORKDIR $DOCKER_HOME
 RUN mkdir -p $DOCKER_HOME/.vscode && \
     mv $DOCKER_HOME/.vscode $DOCKER_HOME/.config/vscode && \
     ln -s -f $DOCKER_HOME/.config/vscode $DOCKER_HOME/.vscode && \
-    git clone https://github.com/VundleVim/Vundle.vim.git \
-        $DOCKER_HOME/.vim/bundle/Vundle.vim && \
-    vim -c "PluginInstall" -c "quitall" && \
-    python3 $DOCKER_HOME/.vim/bundle/YouCompleteMe/install.py \
-        --clang-completer --system-boost && \
     bash -c 'for ext in \
         ms-vscode.cpptools \
         jbenden.c-cpp-flylint \
