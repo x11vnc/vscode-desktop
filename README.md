@@ -106,16 +106,16 @@ to install Singularity for you. It is recommended you use Singularity v2.6 or la
 
 To use the Docker image with Singularity, please issue the command
 ```
-singularity run -c -B $HOME docker://x11vnc/vscode-desktop:latest
+singularity run -c -B $HOME -B /tmp docker://x11vnc/vscode-desktop:latest
 ```
 It will automatically mount some minimal /dev directories and $HOME in Singularity
-but does not mount most others (such as /run, /tmp, etc.). If you do not want to
+but does not mount most others (such as /run). If you do not want to
 mount your home directory, then remove the `-B $HOME` option.
 
 Alternatively, if you use Singularity v3.x, you may use the commands
 ```
 singularity pull vscode-desktop:latest.sif docker://x11vnc/vscode-desktop:latest
-singularity run -c -B $HOME ./vscode-desktop:latest.sif
+singularity run -c -B $HOME -B /tmp ./vscode-desktop:latest.sif
 ```
 
 Notes regarding Singularity:
