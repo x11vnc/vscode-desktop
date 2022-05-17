@@ -67,6 +67,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
     ln -s -f $DOCKER_HOME/.config/vscode $DOCKER_HOME/.vscode && \
     bash -c 'for ext in \
         ms-vscode.cpptools \
+        ms-vscode.cpptools-extension-pack \
         jbenden.c-cpp-flylint \
         foxundermoon.shell-format \
         cschlosser.doxdocgen \
