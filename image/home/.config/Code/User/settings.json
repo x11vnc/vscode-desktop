@@ -60,6 +60,7 @@
         "latex",
         "less",
         "markdown",
+        "matlab",
         "php",
         "plaintext",
         "python",
@@ -80,5 +81,9 @@
     ],
     "cSpell.dictionaries": [
         "enchant"
-    ]
+    ],
+    "matlab-formatter.indentMode": "only_nested_functions",
+    "matlab-formatter.separateBlocks": false,
+    "matlab.matlabpath": "/usr/local/bin",
+    "matlab.mlintpath": "/usr/local/bin"
 }
