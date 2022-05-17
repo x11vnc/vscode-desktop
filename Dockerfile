@@ -67,6 +67,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
     ln -s -f $DOCKER_HOME/.config/vscode $DOCKER_HOME/.vscode && \
     bash -c 'for ext in \
         ms-vscode.cpptools \
+        ms-vscode.cpptools-extension-pack \
         jbenden.c-cpp-flylint \
         foxundermoon.shell-format \
         cschlosser.doxdocgen \
@@ -77,6 +78,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         yzhang.markdown-all-in-one \
         davidanson.vscode-markdownlint \
         gimly81.matlab \
+        affenwiesel.matlab-formatter \
         krvajalm.linter-gfortran \
         ms-python.python \
         guyskk.language-cython \
@@ -84,6 +86,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         twxs.cmake \
         shardulm94.trailing-spaces \
         ms-azuretools.vscode-docker \
+        github.vscode-pull-request-github \
         formulahendry.code-runner \
         formulahendry.terminal; \
         do \
