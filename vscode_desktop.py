@@ -8,8 +8,6 @@ It also sets up port forwarding for ssh.
 
 # Author: Xiangmin Jiao <xmjiao@gmail.com>
 
-from __future__ import print_function  # Only Python 2.x
-
 import sys
 import subprocess
 import time
@@ -22,7 +20,6 @@ tag = "latest"
 projdir = "project"
 workdir = "project"
 volume = proj + "_project"
-
 
 
 def parse_args(description):
@@ -46,7 +43,7 @@ def parse_args(description):
     parser.add_argument('-v', '--volume',
                         help='A data volume to be mounted at ~/" + projdir + ". ' +
                         'The default is ' + volume + '.',
-                       default=volume)
+                        default=volume)
 
     parser.add_argument('-w', '--workdir',
                         help='The starting work directory in container. ' +
@@ -65,24 +62,30 @@ def parse_args(description):
                         default=False)
 
     parser.add_argument('-c', '--clear',
-                        help='Clear the project data volume (please use with caution).',
+                        help='Clear the project data volume (please use with care).',
                         action='store_true',
                         default=False)
 
     parser.add_argument('-d', '--detach',
-                        help='Run in background and print container id',
+                        help='Run in background and print the container id.',
                         action='store_true',
                         default=False)
 
     parser.add_argument('-s', '--size',
-                        help='Size of the screen. The default is to use ' +
-                        'the current screen size.',
+                        help='The screen size, such as 1440x900, 1920x1080, 2560x1600, etc. ' +
+                        'The default is to use the current screen size.',
                         default="")
 
     parser.add_argument('-n', '--no-browser',
-                        help='Do not start web browser',
+                        help='Do not start web browser. It is false by default, unless ' +
+                        'the current screen size cannot be determined automatically.',
                         action='store_true',
                         default=False)
+
+    parser.add_argument('--password',                        
+                        help='Specify a password for VNC instead of generating a random one. ' +
+                        'You can also set a password using the VNCPASS environment variable.',
+                        default="")
 
     parser.add_argument('-N', '--nvidia',
                         help='Mount the Nvidia card for GPU computation. ' +
@@ -112,6 +115,8 @@ def parse_args(description):
             pass
         else:
             args.image += ':' + args.tag
+    if args.password == '':
+        args.password = os.getenv('VNCPASS', '')
 
     return args
 
@@ -189,7 +194,7 @@ def get_screen_resolution():
         width, height = root.winfo_screenwidth(), root.winfo_screenheight()
 
         return str(width) + 'x' + str(height)
-    except:
+    except BaseException:
         return ""
 
 
@@ -250,18 +255,20 @@ if __name__ == "__main__":
             print('Then, log out and log back in before you can use Docker.')
             sys.exit(-1)
         uid = str(os.getuid())
+        gid = str(os.getgid())
         if uid == '0':
             print('You are running as root. This is not safe. ' +
                   'Please run as a regular user.')
             sys.exit(-1)
     else:
         uid = ""
+        gid = ""
 
     try:
         if args.verbose:
             stdout_write("Check whether Docker is up and running.\n")
         img = subprocess.check_output(['docker', 'images', '-q', args.image])
-    except:
+    except BaseException:
         stderr_write("Docker failed. Please make sure docker was properly " +
                      "installed and has been started.\n")
         sys.exit(-1)
@@ -347,8 +354,10 @@ if __name__ == "__main__":
     container = id_generator()
 
     envs = ["--hostname", container,
+            "--env", "VNCPASS=" + args.password,
             "--env", "RESOLUT=" + size,
-            "--env", "HOST_UID=" + uid]
+            "--env", "HOST_UID=" + uid,
+            "--env", "HOST_GID=" + gid]
 
     # Find a free port for ssh tunning
     port_ssh = str(find_free_port(2222, 50))
@@ -456,11 +465,9 @@ if __name__ == "__main__":
                 sys.exit(0)
 
             print("Press Ctrl-C to terminate the container.")
-            time.sleep(1)
-
             # Wait until the container exits or Ctlr-C is pressed
-            subprocess.check_output(["docker", "exec", container,
-                                     "tail", "-f", "/dev/null"])
+            subprocess.run(["docker", "exec", container,
+                            "tail", "-f", "-n", "0", docker_home + "/.log/vnc.log"])
             sys.exit(0)
 
         except subprocess.CalledProcessError:
