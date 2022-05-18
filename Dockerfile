@@ -37,7 +37,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         \
         clang \
         clang-format \
-        code \
+        nano code \
         fonts-liberation \
         xauth xdg-utils \
         pandoc && \
@@ -59,7 +59,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
 
 USER $DOCKER_USER
-ENV  GIT_EDITOR=nano EDITOR=code
+ENV  GIT_EDITOR=vim EDITOR=code
 ENV  DONT_PROMPT_WSL_INSTALL=1
 WORKDIR $DOCKER_HOME
 
