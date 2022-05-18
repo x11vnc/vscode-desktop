@@ -38,6 +38,8 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         clang \
         clang-format \
         code \
+        fonts-liberation \
+        xauth xdg-utils \
         pandoc && \
     pip3 install -U \
         setuptools \
