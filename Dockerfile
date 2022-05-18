@@ -85,7 +85,6 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         vector-of-bool.cmake-tools \
         twxs.cmake \
         shardulm94.trailing-spaces \
-        ms-azuretools.vscode-docker \
         github.vscode-pull-request-github \
         formulahendry.code-runner \
         formulahendry.terminal; \
