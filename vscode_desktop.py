@@ -73,7 +73,7 @@ def parse_args(description):
 
     parser.add_argument('-s', '--size',
                         help='The screen size, such as 1440x900, 1920x1080, 2560x1600, etc. ' +
-                        'The default is to use the current screen size.',
+                        'The default is to use the current screen size or 1920x1080.',
                         default="")
 
     parser.add_argument('-n', '--no-browser',
@@ -310,10 +310,13 @@ if __name__ == "__main__":
         volumes += ["-v", homedir + "/.gnupg" +
                     ":" + docker_home + "/.gnupg"]
 
-    # Mount .gitconfig to Docker image
+    # Mount .gitconfig and .git-credentials to Docker image
     if os.path.isfile(homedir + "/.gitconfig"):
         volumes += ["-v", homedir + "/.gitconfig" +
                     ":" + docker_home + "/.gitconfig_host"]
+    if os.path.isfile(homedir + "/.git-credentials"):
+        volumes += ["-v", homedir + "/.git-credentials" +
+                    ":" + docker_home + "/.git-credentials_host"]
 
     if args.volume:
         if args.clear:
@@ -345,7 +348,7 @@ if __name__ == "__main__":
         size = get_screen_resolution()
         if not size:
             # Set default size and disable webbrowser
-            size = "1440x900"
+            size = "1920x1080"
             args.no_browser = True
     else:
         size = args.size

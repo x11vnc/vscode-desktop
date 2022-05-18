@@ -1,4 +1,4 @@
-# Builds a Docker image with Ubuntu 20.04 and Visual Studio Code
+# Builds a Docker image with Ubuntu 22.04 and Visual Studio Code
 # for scientific computing, including language supports for C/C++,
 # Python, FORTRAN, MATLAB, Markdown, LaTeX, and Doxygen. Also
 # enables the extensions doxygen, gitLens, terminal, clang-format,
@@ -7,7 +7,7 @@
 # Authors:
 # Xiangmin Jiao <xmjiao@gmail.com>
 
-FROM x11vnc/docker-desktop:20.04
+FROM x11vnc/docker-desktop:latest
 LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 USER root
@@ -37,7 +37,9 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         \
         clang \
         clang-format \
-        code \
+        nano code \
+        fonts-liberation \
+        xauth xdg-utils \
         pandoc && \
     pip3 install -U \
         setuptools \
@@ -57,7 +59,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
 
 USER $DOCKER_USER
-ENV  GIT_EDITOR=nano EDITOR=code
+ENV  GIT_EDITOR=vim EDITOR=code
 ENV  DONT_PROMPT_WSL_INSTALL=1
 WORKDIR $DOCKER_HOME
 
@@ -85,7 +87,6 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         vector-of-bool.cmake-tools \
         twxs.cmake \
         shardulm94.trailing-spaces \
-        ms-azuretools.vscode-docker \
         github.vscode-pull-request-github \
         formulahendry.code-runner \
         formulahendry.terminal; \

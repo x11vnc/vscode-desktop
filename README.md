@@ -34,19 +34,19 @@ Download the Docker Community Edition for free at https://www.docker.com/communi
 **Notes for Linux Users**
 
 * Most Linux distributions have a `docker` package. You can use the package installer for your system to install `docker`. Note that on some system (e.g., OpenSUSE), you may need to run the following commands to start up `docker` after installing `docker`:
-```
-sudo systemctl enable docker
-sudo systemctl start docker
+  ```
+  sudo systemctl enable docker
+  sudo systemctl start docker
 ```
 * After you install Docker, make sure you add yourself to the `docker` group. On Ubuntu, this is done by running the command:
-```
-sudo adduser $USER docker
-```
-On other systems, try the following command.
-```
-sudo usermod -G docker -a $USER 
-```
-After adding yourself to the `docker` group, you need to log out and log back in before you can use Docker.
+  ```
+  sudo adduser $USER docker
+  ```
+  For other Linux systems, try the following command:
+  ```
+  sudo usermod -G docker -a $USER 
+  ```
+  After adding yourself to the `docker` group, you need to log out and log back in before you can use Docker.
 
 ## Running the Docker Image
 
