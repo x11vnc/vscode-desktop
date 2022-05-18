@@ -1,4 +1,4 @@
-# Builds a Docker image with Ubuntu 22.04 and Visual Studio Code
+# Builds a Docker image with Ubuntu 20.04 and Visual Studio Code
 # for scientific computing, including language supports for C/C++,
 # Python, FORTRAN, MATLAB, Markdown, LaTeX, and Doxygen. Also
 # enables the extensions doxygen, gitLens, terminal, clang-format,
@@ -7,7 +7,7 @@
 # Authors:
 # Xiangmin Jiao <xmjiao@gmail.com>
 
-FROM x11vnc/docker-desktop:latest
+FROM x11vnc/docker-desktop:20.04
 LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 USER root
