@@ -16,7 +16,7 @@ WORKDIR /tmp
 ADD image/usr /usr
 ADD image/home $DOCKER_HOME/
 
-# Install vscode and system packages
+# Install vscode, Google Chrome, and system packages
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
     mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg && \
     sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list' && \
@@ -54,6 +54,9 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         Cython \
         Sphinx \
         sphinx_rtd_theme && \
+    curl -O https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    apt install -y ./google-chrome-stable_current_amd64.deb && \
+    apt-get -y autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     echo 'config_vscode.sh' >> /usr/local/bin/init_vnc && \
     chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
