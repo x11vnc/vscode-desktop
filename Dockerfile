@@ -13,6 +13,9 @@ LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 USER root
 WORKDIR /tmp
 
+ADD image/usr /usr
+ADD image/home $DOCKER_HOME/
+
 # Install vscode, Google Chrome, and system packages
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
     mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg && \
@@ -63,9 +66,6 @@ ENV  GIT_EDITOR=vim EDITOR=code
 ENV  DONT_PROMPT_WSL_INSTALL=1
 WORKDIR $DOCKER_HOME
 
-ADD image/usr /usr
-ADD image/home $DOCKER_HOME/
-
 # Install vscode extensions
 RUN mkdir -p $DOCKER_HOME/.vscode && \
     mv $DOCKER_HOME/.vscode $DOCKER_HOME/.config/vscode && \
@@ -100,4 +100,3 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
     find $DOCKER_HOME -type d -exec chmod a+x {} \;
 
 USER root
-
