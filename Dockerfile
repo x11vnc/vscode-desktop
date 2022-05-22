@@ -83,7 +83,6 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         yzhang.markdown-all-in-one \
         davidanson.vscode-markdownlint \
         gimly81.matlab \
-        affenwiesel.matlab-formatter \
         krvajalm.linter-gfortran \
         ms-python.python \
         guyskk.language-cython \
