@@ -83,8 +83,6 @@
     "files.associations": {
         "*.m": "matlab"
     },
-    "matlab-formatter.indentMode": "only_nested_functions",
-    "matlab-formatter.separateBlocks": false,
     "matlab.matlabpath": "/usr/local/bin",
     "matlab.mlintpath": "/usr/local/bin",
     "security.workspace.trust.untrustedFiles": "open"
