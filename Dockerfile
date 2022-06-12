@@ -40,6 +40,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         nano code \
         fonts-liberation \
         xauth xdg-utils \
+        enchant-2 \
         pandoc && \
     pip3 install -U \
         setuptools \
