@@ -41,7 +41,6 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         fonts-liberation \
         xauth xdg-utils \
         enchant-2 \
-        python3-enchant \
         pandoc && \
     pip3 install -U \
         setuptools \
@@ -55,6 +54,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         pytest \
         Cython \
         Sphinx \
+        pyenchant \
         sphinx_rtd_theme && \
     curl -O https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
     apt install -y ./google-chrome-stable_current_amd64.deb && \
