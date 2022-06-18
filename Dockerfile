@@ -61,6 +61,11 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     apt-get -y autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     echo 'config_vscode.sh' >> /usr/local/bin/init_vnc && \
+    perl -e 's/google-chrome-stable/google-chrome-stable --no-sandbox/g' /usr/share/applications/google-chrome.desktop && \
+    perl -e 's/code --/code --no-sandbox --/g' /usr/share/applications/code.desktop && \
+    echo "alias google-chrome='google-chrome --no-sandbox'" >> $DOCKER_HOME/.zshrc && \
+    echo "alias google-chrome-stable='google-chrome-stable --no-sandbox'" >> $DOCKER_HOME/.zshrc && \
+    echo "alias code='code --no-sandbox'" >> $DOCKER_HOME/.zshrc && \
     chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
 
 USER $DOCKER_USER
