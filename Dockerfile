@@ -55,7 +55,8 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
         Cython \
         Sphinx \
         pyenchant \
-        sphinx_rtd_theme && \
+        sphinx_rtd_theme \
+        fortls findent fprettify && \
     apt-get -y autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     echo 'config_vscode.sh' >> /usr/local/bin/init_vnc && \
