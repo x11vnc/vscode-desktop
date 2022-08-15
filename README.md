@@ -14,40 +14,40 @@ addition, it is also compatible with
 
 ## Preparation
 
-Before you start, you need to first install Python and Docker on your computer by following the steps below.
+Before you start, you need to first install Python 3.x and Docker on your computer by following the steps below.
 
 ### Installing Python
-
-If you use Linux or Mac, Python is most likely already installed on your computer, so you can skip this step.
+If you use Linux or Mac, Python 3.x is most likely already installed on your computer, so you can skip this step.
 
 If you use Windows, you need to install Python if you have not yet done so. The easiest way is to install `Miniconda`, which you can download at https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe. During installation, make sure you check the option to make Miniconda the system's default Python.
 
 ### Installing Docker
-
-Download the Docker Community Edition for free at https://www.docker.com/community-edition#/download and then run the installer. Note that you need administrator's privilege to install Docker. After installation, make sure you launch Docker before proceeding to the next step.
+Download Docker Desktop for free at https://docs.docker.com/get-docker/ and then run the installer. Note that you need administrator's privilege to install Docker. After installation, make sure you launch Docker before proceeding to the next step.
 
 **Notes for Windows Users**
+1. Docker only supports 64-bit Windows 10 Pro or higher. It is highly recommended that you install Docker Desktop with the WSL 2 backend instead of the Hyper-V backend. The latter only supports Enterprise or Education versions, has lower performance, and requires additional configuration steps.
+2. For security reasons, it is recommended that you do not use Docker in the Administrator account, even if you are the sole user on the computer.
 
-1. Docker only supports 64-bit Windows 10 Pro or higher. If you have Windows 8 or Windows 10 Home, you need to upgrade your Windows operating system before installing Docker. Stony Brook students can get Windows 10 Education free of charge at https://stonybrook.onthehub.com. Note that the older [Docker Toolbox](https://www.docker.com/products/docker-toolbox) supports older versions of Windows, but it should not be used.
-2. It is recommended to enable "Use the WLS-2 based engine" in Docker.
+**Notes for Mac Users**
+1. Docker Desktop supports only MacOS 10.15 or newer. The Docker image supports both Intel chips and Apple M1 chips natively. 
+Please make sure that you install Docker Desktop for Mac that is native to your computer's CPU.
+2. By default, Docker uses half the number of processors and 2GB of memory on Mac. If you want to run large jobs, you can increase the amount of memory or the number of cores dedicated to Docker. Just click on the Docker icon in the system tray, select `Preferences` and then select the `Advanced` tab to adjust the settings.
 
 **Notes for Linux Users**
-
 * Most Linux distributions have a `docker` package. You can use the package installer for your system to install `docker`. Note that on some system (e.g., OpenSUSE), you may need to run the following commands to start up `docker` after installing `docker`:
-  ```
-  sudo systemctl enable docker
-  sudo systemctl start docker
+```
+sudo systemctl enable docker
+sudo systemctl start docker
 ```
 * After you install Docker, make sure you add yourself to the `docker` group. On Ubuntu, this is done by running the command:
-  ```
-  sudo adduser $USER docker
-  ```
-  For other Linux systems, try the following command:
-  ```
-  sudo usermod -G docker -a $USER 
-  ```
-  After adding yourself to the `docker` group, you need to log out and log back in before you can use Docker.
-
+```
+sudo adduser $USER docker
+```
+On other systems, try the following command.
+```
+sudo usermod -G docker -a $USER
+```
+After adding yourself to the `docker` group, you need to log out and log back in before you can use Docker.
 ## Running the Docker Image
 
 To run the Docker image, first download the script [`vscode_desktop.py`](https://raw.githubusercontent.com/x11vnc/vscode-desktop/main/vscode_desktop.py)
@@ -62,26 +62,26 @@ curl -s -O https://raw.githubusercontent.com/x11vnc/vscode-desktop/main/vscode_d
 
 After downloading the script, you can start the Docker image using the command
 ```
-python vscode_desktop.py -p
+python3 vscode_desktop.py -p
 ```
 This will download and run the Docker image and then launch your default web browser to show the desktop environment. The `-p` option is optional, and it instructs the Python script to pull and update the image to the latest version. The work directory by default will be mapped to the current working directory on your host.
 
 If your source code is in a named Docker volume, e.g. `myproject`, you can mount the volume to the `~/project` directory inside the container using the command
 ```
-python vscode_desktop.py -v myproject
+python3 vscode_desktop.py -v myproject
 ```
 and the work directory will be the data volume.
 
 For additional command-line options, use the command
 ```
-python vscode_desktop.py -h
+python3 vscode_desktop.py -h
 ```
 
 ### Running the Docker Image Offline
 
 After you have download the Docker image using the `curl` and `python` commands above, you can run the image offline without internet connection using the following command:
 ```
-python vscode_desktop.py
+python3 vscode_desktop.py
 ```
 in the directory where you ran the `curl` command above.
 
@@ -133,7 +133,7 @@ Notes regarding Singularity:
 For the best experience, use [VNC Viewer](http://realvnc.com/download/viewer) to connect to Docker image with the port and password displayed in the terminal output, which supports the full-screen mode. If you don't have the VNC viewer, you can
 also use the full-screen mode in a web browser.
 
-When using a web browser, we recommend *Google Chrome* or *Chromium browser*, which have the same user interface. On Windows or Linux, you can enter full-screen mode by selecting the menu `View --> "Full Screen"` Alternatively, open the Chrome menu (the three vertical dots at the top right) and select the square to the far right of the Zoom buttons (the "+" and "-" buttons). To exit the full-screen mode, press the `F11` key. On Mac, it behaves similarly except that the menu item is named `Enter Full Screen` instead of `Full Screen`, and the keyboard shortcut is `Ctrl-Cmd-f` instead of `F11`. You can also click on the green circle at the top-left corner of *Google Chrome* to enter and exit the full-screen mode. Note that in the full-screen mode, you need to disable `Always Show Toolbar in Full Screen` under the `View` menu of `Google Chrome`, and you can reveal the menu and the toolbar by sliding your mouse to the top of the display.
+When using a web browser, we recommend *Google Chrome*, *Chromium browser*, or *Microsoft Edge*, which has similar user interfaces. On Windows or Linux, you can enter full-screen mode by selecting the menu `View --> "Full Screen"` Alternatively, open the Chrome menu (the three vertical dots at the top right) and select the square to the far right of the Zoom buttons (the "+" and "-" buttons). To exit the full-screen mode, press the `F11` key. On Mac, it behaves similarly except that the menu item is named `Enter Full Screen` instead of `Full Screen`, and the keyboard shortcut is `Ctrl-Cmd-f` instead of `F11`. You can also click on the green circle at the top-left corner of *Google Chrome* to enter and exit the full-screen mode. Note that in the full-screen mode, you need to disable `Always Show Toolbar in Full Screen` under the `View` menu of `Google Chrome`, and you can reveal the menu and the toolbar by sliding your mouse to the top of the display.
 
 Alternatively, you can also use the "native" browsers on different platforms.
 - On Windows, you can use the native browser *Microsoft Edge*. Toggle on and off the full-screen mode by pressing Win+Shift+Enter (hold down the Windows and Shift keys and press Enter).
@@ -144,12 +144,11 @@ If your Docker desktop environment started automatically in a non-recommended br
 
 ## Tips and Tricks
 
-1. By default, Docker uses two CPU cores and 2GB of memory on Mac and Windows. If you want to run large jobs, you can increase the amount of memory or the number of cores dedicated to Docker. Just click on the Docker icon in the system tray, select `Settings` (or `Preferences` for Mac) and then select the `Advanced` tab to adjust the settings.
-2. When using the Docker desktop, the files under `$HOME/.config`, `$HOME/.ssh`,  `$HOME/shared` and any other
+1. When using the Docker desktop, the files under `$HOME/.config`, `$HOME/.ssh`,  `$HOME/shared` and any other
 directory that you might have mounted explicitly are persistent. Any change to files in other directories will be lost when the Docker container stops. Use `$HOME/.config` to store the configuration files of the desktop environment. `$HOME/shared` maps to the working directory on the host, and you are recommended to use it or a mounted project directory to store codes and data.
-3. The `$HOME/.ssh` directory in the Docker container maps to the `.ssh` directory on your host computer. This is particularly convenient for you to use your ssh-keys for authentications with git repositories (such as github or bitbucket). To use your ssh keys, run the `ssh-add` in a terminal to add your keys to the ssh-agent.
-4. You can copy and paste between the host and the Docker desktop through the `Clipboard` box in the left toolbar, which is synced automatically with the clipboard of the Docker desktop. To copy from the Docker desktop to the host, first, select the text in the Docker desktop, and then go to the `Clipboard` box to copy. To copy from host to the Docker desktop, first, paste the text into the `Clipboard` box, and then paste the text in the Docker desktop.
-5. To stop the Docker container, do not just close the browser window, because the Docker container would still be running in the background. Instead, you can stop the container using one of the following approaches:
+2. The `$HOME/.ssh` directory in the Docker container maps to the `.ssh` directory on your host computer. This is particularly convenient for you to use your ssh-keys for authentications with git repositories (such as github or bitbucket). To use your ssh keys, run the `ssh-add` in a terminal to add your keys to the ssh-agent.
+3. You can copy and paste between the host and the Docker desktop through the `Clipboard` box in the left toolbar, which is synced automatically with the clipboard of the Docker desktop. To copy from the Docker desktop to the host, first, select the text in the Docker desktop, and then go to the `Clipboard` box to copy. To copy from host to the Docker desktop, first, paste the text into the `Clipboard` box, and then paste the text in the Docker desktop.
+4. To stop the Docker container, do not just close the browser window, because the Docker container would still be running in the background. Instead, you can stop the container using one of the following approaches:
  - Use the `logout` button in the lower-left corner of the Docker desktop,
  - Press Ctrl-C twice in the terminal where you started the python script, or
  - Run the command `docker stop <Container ID>` in a terminal on the host, and you can find the `Container ID` using the `docker ps -a` command.
