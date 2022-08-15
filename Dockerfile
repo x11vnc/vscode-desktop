@@ -37,7 +37,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > pac
         ccache \
         \
         clang \
-        clang-format \
+        clang-format findent fortran-language-server \
         nano code \
         fonts-liberation \
         xauth xdg-utils \
@@ -57,8 +57,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > pac
         Cython \
         Sphinx \
         pyenchant \
-        sphinx_rtd_theme \
-        fortls findent fprettify && \
+        sphinx_rtd_theme && \
     apt-get -y autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     echo 'config_vscode.sh' >> /usr/local/bin/init_vnc && \
