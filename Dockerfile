@@ -61,7 +61,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > pac
     apt-get -y autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     echo 'config_vscode.sh' >> /usr/local/bin/init_vnc && \
-    perl -e 's/code --/code --no-sandbox --/g' /usr/share/applications/code.desktop && \
+    perl -e 's/code --/code --no-sandbox --/g' -pi /usr/share/applications/code.desktop && \
     echo "alias code='code --no-sandbox'" >> $DOCKER_HOME/.zshrc && \
     chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
 
