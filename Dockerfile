@@ -43,7 +43,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > pac
         xauth xdg-utils \
         enchant-2 \
         pandoc \
-        doxygen && \
+        doxygen shellcheck && \
     pip3 install -U \
         setuptools \
         ipython && \
@@ -95,7 +95,8 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         shardulm94.trailing-spaces \
         github.vscode-pull-request-github \
         formulahendry.code-runner \
-        formulahendry.terminal; \
+        formulahendry.terminal \
+        timonwong.shellcheck; \
         do \
             code --install-extension $ext; \
         done' && \
