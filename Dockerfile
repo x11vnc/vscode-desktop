@@ -2,7 +2,7 @@
 # for scientific computing, including language supports for C/C++,
 # Python, FORTRAN, MATLAB, Markdown, LaTeX, and Doxygen. Also
 # enables the extensions doxygen, gitLens, terminal, clang-format,
-# and code spell checker. GitHub Desktop is also installed.
+# and code spell checker.
 #
 # Authors:
 # Xiangmin Jiao <xmjiao@gmail.com>
@@ -15,8 +15,6 @@ WORKDIR /tmp
 
 ADD image/usr /usr
 ADD image/home $DOCKER_HOME/
-
-ARG GITHUB_DESKTOP_VERSION=2.9.3-linux3
 
 # Install vscode and system packages
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg && \
@@ -61,10 +59,6 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > pac
         pyenchant \
         sphinx_rtd_theme && \
     apt-get -y autoremove && \
-    curl -L -O https://github.com/shiftkey/desktop/releases/download/release-$GITHUB_DESKTOP_VERSION/GitHubDesktop-linux-$GITHUB_DESKTOP_VERSION.deb && \
-    apt install -y ./GitHubDesktop-linux-$GITHUB_DESKTOP_VERSION.deb && \
-    perl -e 's/github-desktop %U/github-desktop --no-sandbox %U/g' -pi /usr/share/applications/github-desktop.desktop && \
-    echo "alias github-desktop='github-desktop --no-sandbox'" >> $DOCKER_HOME/.zshrc && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     echo 'config_vscode.sh' >> /usr/local/bin/init_vnc && \
     perl -e 's/code --/code --no-sandbox --/g' -pi /usr/share/applications/code.desktop && \
