@@ -88,8 +88,10 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         davidanson.vscode-markdownlint \
         gimly81.matlab \
         krvajalm.linter-gfortran \
+        fortran-lang.linter-gfortran \
         ms-python.python \
         guyskk.language-cython \
+        ms-vscode.makefile-tools \
         vector-of-bool.cmake-tools \
         twxs.cmake \
         shardulm94.trailing-spaces \
