@@ -97,7 +97,6 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         shardulm94.trailing-spaces \
         github.vscode-pull-request-github \
         formulahendry.code-runner \
-        formulahendry.terminal \
         timonwong.shellcheck; \
         do \
             code --install-extension $ext; \
