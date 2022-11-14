@@ -10,6 +10,10 @@
     "[cpp]": {
         "editor.autoIndent": "full"
     },
+    "[makefile]": {
+        "editor.insertSpaces": false,
+        "editor.detectIndentation": false
+    },
     "C_Cpp.clang_format_fallbackStyle": "Google",
     "C_Cpp.clang_format_sortIncludes": true,
     "C_Cpp.clang_format_path": "/usr/bin/clang-format",
