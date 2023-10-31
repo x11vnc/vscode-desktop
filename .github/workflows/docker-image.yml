@@ -11,6 +11,10 @@ jobs:
     runs-on: self-hosted
 
     steps:
+      - name:  "add-path"
+        shell: pwsh
+        run: Add-Content $env:GITHUB_PATH "C:\Program Files\Git\bin"
+        if: runner.os == 'Windows'
       - name: Checkout
         uses: actions/checkout@v3
       - name: Obtain repository and tag names
