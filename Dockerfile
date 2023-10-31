@@ -1,6 +1,6 @@
 # Builds a Docker image with Ubuntu 22.04 and Visual Studio Code
 # for scientific computing, including language supports for C/C++,
-# Python, FORTRAN, MATLAB, Markdown, LaTeX, and Doxygen. Also
+# Python, FORTRAN, MATLAB, Markdown, and Doxygen. Also
 # enables the extensions doxygen, gitLens, terminal, clang-format,
 # and code spell checker.
 #
@@ -86,11 +86,16 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         --install-extension bbenoist.doxygen \
         --install-extension streetsidesoftware.code-spell-checker \
         --install-extension eamodio.gitlens \
-        --install-extension james-yu.latex-workshop \
         --install-extension yzhang.markdown-all-in-one \
         --install-extension davidanson.vscode-markdownlint \
         --install-extension fortran-lang.linter-gfortran \
-        --install-extension ms-python.python && \
+        --install-extension ms-python.python \
+        --install-extension guyskk.language-cython \
+        --install-extension twxs.cmake \
+        --install-extension shardulm94.trailing-spaces \
+        --install-extension formulahendry.code-runner \
+        --install-extension foxundermoon.shell-format \
+        --install-extension timonwong.shellcheck && \
     chmod -R a+r $HOME/.config && \
     find $DOCKER_HOME -type d -exec chmod a+x {} \;
 
