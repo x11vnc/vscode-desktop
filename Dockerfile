@@ -89,11 +89,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         --install-extension yzhang.markdown-all-in-one \
         --install-extension davidanson.vscode-markdownlint \
         --install-extension fortran-lang.linter-gfortran \
-        --install-extension ms-python.python \
-        --install-extension twxs.cmake \
-        --install-extension shardulm94.trailing-spaces \
-        --install-extension foxundermoon.shell-format \
-        --install-extension timonwong.shellcheck && \
+        --install-extension ms-python.python && \
     chmod -R a+r $HOME/.config && \
     find $DOCKER_HOME -type d -exec chmod a+x {} \;
 
