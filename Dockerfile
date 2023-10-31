@@ -90,7 +90,9 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         --install-extension davidanson.vscode-markdownlint \
         --install-extension fortran-lang.linter-gfortran \
         --install-extension ms-python.python && \
+    echo "Finished installing vscode extensions" && \
     chmod -R a+r $HOME/.config && \
+    echo "Finished changing modes" && \
     find $DOCKER_HOME -type d -exec chmod a+x {} \;
 
 USER root
