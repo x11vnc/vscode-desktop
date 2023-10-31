@@ -70,40 +70,10 @@ ENV  GIT_EDITOR=vim EDITOR=code
 ENV  DONT_PROMPT_WSL_INSTALL=1
 WORKDIR $DOCKER_HOME
 
-# Install vscode extensions
+# Set up directory for vscode extensions
 RUN mkdir -p $DOCKER_HOME/.vscode && \
     mv $DOCKER_HOME/.vscode $DOCKER_HOME/.config/vscode && \
     ln -s -f $DOCKER_HOME/.config/vscode $DOCKER_HOME/.vscode && \
-    DISPLAY= bash -c 'for ext in \
-        GitHub.copilot \
-        GitHub.copilot-chat \
-        genieai.chatgpt-vscode \
-        ms-vscode.cpptools \
-        ms-vscode.cpptools-extension-pack \
-        jbenden.c-cpp-flylint \
-        foxundermoon.shell-format \
-        cschlosser.doxdocgen \
-        bbenoist.doxygen \
-        streetsidesoftware.code-spell-checker \
-        eamodio.gitlens \
-        james-yu.latex-workshop \
-        yzhang.markdown-all-in-one \
-        davidanson.vscode-markdownlint \
-        gimly81.matlab \
-        krvajalm.linter-gfortran \
-        fortran-lang.linter-gfortran \
-        ms-python.python \
-        guyskk.language-cython \
-        ms-vscode.makefile-tools \
-        vector-of-bool.cmake-tools \
-        twxs.cmake \
-        shardulm94.trailing-spaces \
-        github.vscode-pull-request-github \
-        formulahendry.code-runner \
-        timonwong.shellcheck; \
-        do \
-            code --force --install-extension $ext; \
-        done' && \
     chmod -R a+r $HOME/.config && \
     find $DOCKER_HOME -type d -exec chmod a+x {} \;
 
