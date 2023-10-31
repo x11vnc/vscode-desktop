@@ -8,7 +8,7 @@ jobs:
 
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: self-host
 
     steps:
       - name:  "add-path"
