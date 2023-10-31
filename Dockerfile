@@ -70,10 +70,34 @@ ENV  GIT_EDITOR=vim EDITOR=code
 ENV  DONT_PROMPT_WSL_INSTALL=1
 WORKDIR $DOCKER_HOME
 
-# Set up directory for vscode extensions
+# Install vscode extensions
 RUN mkdir -p $DOCKER_HOME/.vscode && \
     mv $DOCKER_HOME/.vscode $DOCKER_HOME/.config/vscode && \
     ln -s -f $DOCKER_HOME/.config/vscode $DOCKER_HOME/.vscode && \
+    code --install-extension GitHub.copilot \
+        --install-extension GitHub.copilot-chat \
+        --install-extension genieai.chatgpt-vscode \
+        --install-extension ms-vscode.cpptools \
+        --install-extension ms-vscode.cpptools-extension-pack \
+        --install-extension jbenden.c-cpp-flylint \
+        --install-extension foxundermoon.shell-format \
+        --install-extension cschlosser.doxdocgen \
+        --install-extension bbenoist.doxygen \
+        --install-extension streetsidesoftware.code-spell-checker \
+        --install-extension eamodio.gitlens \
+        --install-extension james-yu.latex-workshop \
+        --install-extension yzhang.markdown-all-in-one \
+        --install-extension davidanson.vscode-markdownlint \
+        --install-extension gimly81.matlab \
+        --install-extension fortran-lang.linter-gfortran \
+        --install-extension ms-python.python \
+        --install-extension guyskk.language-cython \
+        --install-extension ms-vscode.makefile-tools \
+        --install-extension twxs.cmake \
+        --install-extension shardulm94.trailing-spaces \
+        --install-extension github.vscode-pull-request-github \
+        --install-extension formulahendry.code-runner \
+        --install-extension timonwong.shellcheck && \
     chmod -R a+r $HOME/.config && \
     find $DOCKER_HOME -type d -exec chmod a+x {} \;
 
