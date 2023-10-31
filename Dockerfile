@@ -74,7 +74,10 @@ WORKDIR $DOCKER_HOME
 RUN mkdir -p $DOCKER_HOME/.vscode && \
     mv $DOCKER_HOME/.vscode $DOCKER_HOME/.config/vscode && \
     ln -s -f $DOCKER_HOME/.config/vscode $DOCKER_HOME/.vscode && \
-    bash -c 'for ext in \
+    DISPLAY= bash -c 'for ext in \
+        GitHub.copilot \
+        GitHub.copilot-chat \
+        genieai.chatgpt-vscode \
         ms-vscode.cpptools \
         ms-vscode.cpptools-extension-pack \
         jbenden.c-cpp-flylint \
@@ -97,12 +100,9 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         shardulm94.trailing-spaces \
         github.vscode-pull-request-github \
         formulahendry.code-runner \
-        GitHub.copilot \
-        GitHub.copilot-chat \
-        genieai.chatgpt-vscode \
         timonwong.shellcheck; \
         do \
-            code --install-extension $ext; \
+            code --force --install-extension $ext; \
         done' && \
     chmod -R a+r $HOME/.config && \
     find $DOCKER_HOME -type d -exec chmod a+x {} \;
