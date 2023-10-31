@@ -90,10 +90,8 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         --install-extension davidanson.vscode-markdownlint \
         --install-extension fortran-lang.linter-gfortran \
         --install-extension ms-python.python \
-        --install-extension guyskk.language-cython \
         --install-extension twxs.cmake \
         --install-extension shardulm94.trailing-spaces \
-        --install-extension formulahendry.code-runner \
         --install-extension foxundermoon.shell-format \
         --install-extension timonwong.shellcheck && \
     chmod -R a+r $HOME/.config && \
