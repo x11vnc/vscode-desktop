@@ -77,14 +77,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
     code --install-extension github.copilot \
         --install-extension github.copilot-chat \
         --install-extension github.vscode-pull-request-github \
-        --install-extension genieai.chatgpt-vscode \
-        --install-extension ms-vscode.cpptools \
-        --install-extension ms-vscode.cpptools-extension-pack \
-        --install-extension ms-vscode.makefile-tools \
-        --install-extension mathworks.language-matlab \
-        --install-extension cschlosser.doxdocgen \
-        --install-extension bbenoist.doxygen \
-        --install-extension streetsidesoftware.code-spell-checker && \
+        --install-extension genieai.chatgpt-vscode && \
     echo "Finished installing vscode extensions" && \
     chmod -R a+r $HOME/.config && \
     echo "Finished changing modes" && \
