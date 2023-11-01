@@ -84,10 +84,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
         --install-extension mathworks.language-matlab \
         --install-extension cschlosser.doxdocgen \
         --install-extension bbenoist.doxygen \
-        --install-extension streetsidesoftware.code-spell-checker \
-        --install-extension eamodio.gitlens \
-        --install-extension yzhang.markdown-all-in-one \
-        --install-extension ms-python.python && \
+        --install-extension streetsidesoftware.code-spell-checker && \
     echo "Finished installing vscode extensions" && \
     chmod -R a+r $HOME/.config && \
     echo "Finished changing modes" && \
