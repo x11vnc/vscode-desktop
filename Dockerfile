@@ -75,10 +75,26 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
     mv $DOCKER_HOME/.vscode $DOCKER_HOME/.config/vscode && \
     ln -s -f $DOCKER_HOME/.config/vscode $DOCKER_HOME/.vscode && \
     code --install-extension github.copilot \
-        --install-extension github.copilot-chat && \
-    echo "Finished installing vscode extensions" && \
+        --install-extension github.copilot-chat \
+        --install-extension github.vscode-pull-request-github \
+        --install-extension genieai.chatgpt-vscode \
+        --install-extension ms-vscode.cpptools \
+        --install-extension ms-vscode.cpptools-extension-pack \
+        --install-extension ms-vscode.makefile-tools \
+        --install-extension mathworks.language-matlab \
+        --install-extension cschlosser.doxdocgen \
+        --install-extension bbenoist.doxygen \
+        --install-extension streetsidesoftware.code-spell-checker \
+        --install-extension eamodio.gitlens \
+        --install-extension yzhang.markdown-all-in-one \
+        --install-extension davidanson.vscode-markdownlint \
+        --install-extension fortran-lang.linter-gfortran \
+        --install-extension ms-python.python \
+        --install-extension twxs.cmake \
+        --install-extension shardulm94.trailing-spaces \
+        --install-extension foxundermoon.shell-format \
+        --install-extension timonwong.shellcheck && \
     chmod -R a+r $HOME/.config && \
-    echo "Finished changing modes" && \
     find $DOCKER_HOME -type d -exec chmod a+x {} \;
 
 USER root
