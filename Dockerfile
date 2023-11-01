@@ -75,9 +75,7 @@ RUN mkdir -p $DOCKER_HOME/.vscode && \
     mv $DOCKER_HOME/.vscode $DOCKER_HOME/.config/vscode && \
     ln -s -f $DOCKER_HOME/.config/vscode $DOCKER_HOME/.vscode && \
     code --install-extension github.copilot \
-        --install-extension github.copilot-chat \
-        --install-extension github.vscode-pull-request-github \
-        --install-extension genieai.chatgpt-vscode && \
+        --install-extension github.copilot-chat && \
     echo "Finished installing vscode extensions" && \
     chmod -R a+r $HOME/.config && \
     echo "Finished changing modes" && \
