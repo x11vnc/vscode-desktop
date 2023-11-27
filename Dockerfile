@@ -25,6 +25,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > pac
     apt-get update && \
     apt-get install  -y --no-install-recommends \
         build-essential \
+        musl-dev \
         pkg-config \
         gfortran \
         cmake \
@@ -38,7 +39,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > pac
         \
         clang \
         clang-format findent fortran-language-server \
-        nano code \
+        nano code code-insiders \
         fonts-liberation \
         xauth xdg-utils \
         enchant-2 \
