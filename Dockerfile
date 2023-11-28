@@ -44,7 +44,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > pac
         xauth xdg-utils \
         enchant-2 \
         pandoc \
-        doxygen shellcheck && \
+        doxygen shellcheck tmux screen && \
     pip3 install -U \
         setuptools \
         ipython && \
